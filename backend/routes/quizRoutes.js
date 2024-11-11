@@ -4,11 +4,12 @@ import {
   publishQuiz,
   deleteQuiz,
 } from "../controllers/quizController.js";
+import authMiddleware from "../middleware/authMiddleware.js";
 
 const quizRouter = express.Router();
 
-quizRouter.post("/", createQuiz);
-quizRouter.put("/:id/publish", publishQuiz);
-quizRouter.delete("/:id", deleteQuiz);
+quizRouter.post("/", authMiddleware, createQuiz);
+quizRouter.put("/:id/publish", authMiddleware, publishQuiz);
+quizRouter.delete("/:id", authMiddleware, deleteQuiz);
 
 export default quizRouter;
